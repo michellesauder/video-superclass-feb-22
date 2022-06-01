@@ -1,3 +1,5 @@
+console.log('hello')
+
 window.addEventListener("load", () => {
   // initialize number of participants with local video.
   // we can have a max of six participants.
@@ -10,8 +12,19 @@ window.addEventListener("load", () => {
 
   // join the video room
   async function connect() {
+    console.log('connect')
     startDiv.style.display = "none";
     // TODO: Fetch an access token
+    const response = await fetch("/token", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({identity: identityInput.value})
+    });
+    const { token } = await response.json();
+    console.log({token})
 
     // TODO: Use the access token to join a room
   }
